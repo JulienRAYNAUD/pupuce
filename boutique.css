@@ -1,0 +1,28 @@
+.banniere {
+  text-align: center;
+}
+
+.flexd {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border-top: 15px solid white;
+}
+
+a > img {
+  border: 5px solid black;
+  border-radius: 50px;
+}
+
+a>img:hover {
+  opacity: 0.5;
+  transition: 0.5s;
+}
+
+#modifier:hover {
+  background-color: lightblue;
+}
+
+#supprimer:hover {
+  background-color: red;
+}
