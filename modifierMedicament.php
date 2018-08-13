@@ -78,22 +78,22 @@
                     <label for="prix">Quantité stock&nbsp;&nbsp;<a href="#"><i class="enabledqte fas fa-pen"></i></a></label>
                     <input type="number" name="quantiteStock" class="inputqteenabled form-control form-control-sm" id="quantiteStock" value="<?php echo $donnees['quantiteStock']; ?>" readonly>
                   </div>
-                  <button type="submit" class="btn btn-primary" name="modifierMedicament" id="modifierMedicament">Modifier le médicament</button>
-                  <br><br>
-                  <a href="index.php"><i class="fas fa-home">&nbsp;</i>Retour à l'accueil</a><br>
-                  <a href="medicaments.php#tablo"><i class="far fa-arrow-alt-circle-left">&nbsp;</i>Revenir à la liste des médicaments</a>
-
+                  <button type="submit" class="submitenabled btn btn-primary" name="submitMedicament" id="submitMedicament" disabled>Modifier le médicament</button>
       <?php
       //On vérifie si le formulaire a été validé
-      if(isset($_POST['modifierMedicament'])){
+      if(isset($_POST['submitMedicament'])){
         // On vérifie si tous les champs sont remplis
         if(empty($_POST['nom']) || empty($_POST['description']) || empty($_POST['image']) || empty($_POST['prix']) || empty($_POST['quantiteStock'])){
             // Si non, on avertit l'utilisateur
           ?><span style="color:red";>Veuillez remplir tous les champs !</span><?php
+          $msgKO .= " Veuillez remplir tous les champs !<br>";
             // On limite la description à 64 caractères max car la bdd n'en accepte pas plus
         }else if(strlen($_POST['description']) > 64){
             ?><span style="color:red";>La description ne doit pas dépasser 64 caractères !</span><?php
-          }else if(substr($_POST['image'], 0, 4) == "http"){
+            $msgKO .= " La description ne doit pas dépasser 64 caractères !<br>";
+          }
+        if(strlen($msgKO) == 0){
+          if(substr($_POST['image'], 0, 4) == "http"){
             $query = "UPDATE `produits` SET `nom` = '".$_POST['nom']."', `description` = '".$_POST['description']."', `image` = '".$_POST['image']."', `prix` = '".$_POST['prix']."', `quantiteStock` = '".$_POST['quantiteStock']."' WHERE `id` = '".$_GET['id']."'";
           }else{
         $query = "UPDATE `produits` SET `nom` = '".$_POST['nom']."', `description` = '".$_POST['description']."', `image` = 'images/".$_POST['image']."', `prix` = '".$_POST['prix']."', `quantiteStock` = '".$_POST['quantiteStock']."' WHERE `id` = '".$_GET['id']."'";
@@ -103,7 +103,11 @@
       header("Location: confirmModif.php");
       exit;
       }
+    }
       ?>
+      <br><br>
+      <a href="index.php"><i class="fas fa-home">&nbsp;</i>Retour à l'accueil</a><br>
+      <a href="medicaments.php#tablo"><i class="far fa-arrow-alt-circle-left">&nbsp;</i>Revenir à la liste des médicaments</a>
 
               </form>
             </div>
@@ -114,18 +118,23 @@
           <script>
           $(".enablednom").on("click",function (){
           $(".inputnomenabled").removeAttr("readonly");
+          $(".submitenabled").removeAttr("disabled");
           });
           $(".enableddesc").on("click",function (){
           $(".inputdescenabled").removeAttr("readonly");
+          $(".submitenabled").removeAttr("disabled");
           });
           $(".enabledimage").on("click",function (){
           $(".inputimageenabled").removeAttr("readonly");
+          $(".submitenabled").removeAttr("disabled");
           });
           $(".enabledprix").on("click",function (){
           $(".inputprixenabled").removeAttr("readonly");
+          $(".submitenabled").removeAttr("disabled");
           });
           $(".enabledqte").on("click",function (){
           $(".inputqteenabled").removeAttr("readonly");
+          $(".submitenabled").removeAttr("disabled");
           });
           </script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

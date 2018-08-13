@@ -63,10 +63,14 @@
         if(empty($_POST['nom']) || empty($_POST['description']) || empty($_POST['image']) || empty($_POST['prix']) || empty($_POST['quantiteStock'])){
             // Si non, on avertit l'utilisateur
           ?><span style="color:red";>Veuillez remplir tous les champs !</span><?php
-          // On limite la description à 64 caractères max car la bdd n'en accepte pas plus
+          $msgKO .= " Veuillez remplir tous les champs !<br>";
+            // On limite la description à 64 caractères max car la bdd n'en accepte pas plus
         }else if(strlen($_POST['description']) > 64){
             ?><span style="color:red";>La description ne doit pas dépasser 64 caractères !</span><?php
-          }else{
+            $msgKO .= " La description ne doit pas dépasser 64 caractères !<br>";
+          }
+          // si je n'ai pas de message d'alert
+      		if(strlen($msgKO) == 0){
         try {
           //je me connecte au serveur et la bdd
           $dbh = new PDO('mysql:host=localhost;dbname=pupuce;charset=utf8', $user, $pass);
