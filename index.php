@@ -112,7 +112,7 @@
 				<?php
 	    } else { // Sinon on affiche le menu des produits ?>
         <div class="flexd">
-          <a href="nourriture.php"><img src="images/nourriture.jpg"></a>
+          <a href="nourriture.php"><img class="lien" src="images/nourriture.jpg"></a>
           <a href="jouets.php"><img src="images/jouets.jpg"></a>
           <a href="medicaments.php"><img src="images/medicaments.jpg"></a>
         </div>

@@ -2,6 +2,17 @@
   text-align: center;
 }
 
+.disphid {
+  display: none;
+}
+
+.logout {
+  position: absolute;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+
 .flexd {
   display: flex;
   flex-direction: row;
@@ -11,7 +22,7 @@
 
 a > img {
   border: 5px solid black;
-  border-radius: 50px;
+  border-radius: 40px;
 }
 
 a>img:hover {
@@ -19,10 +30,34 @@ a>img:hover {
   transition: 0.5s;
 }
 
-#modifier:hover {
-  background-color: lightblue;
+@media (max-width: 1290px) {
+  .logout {
+    position: static;
+    text-align: center;
+  }
 }
 
-#supprimer:hover {
-  background-color: red;
+@media (max-width: 1240px) {
+  .flexd {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 1000px) {
+  .banniere > a > img {
+    width: 100%;
+  }
+}
+
+@media (max-width: 422px) {
+  .lien {
+    width: 100%;
+  }
+}
+
+@media (max-width: 422px) {
+  .flexd > a > img {
+    width: 100%;
+  }
 }

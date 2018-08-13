@@ -23,8 +23,8 @@
               <link href="boutique.css" type="text/css" rel="stylesheet">
             </head>
             <body>
-              <div class="logout">
-                <a href="logout.php"><i class="fas fa-sign-out-alt"> Déconnexion</i></a>
+              <div>
+                <a href="logout.php">&nbsp;<i class="fas fa-sign-out-alt"> Déconnexion</i></a>
               </div>
       <!--    <h1>Boutique en ligne simplifiée</h1> -->
 
@@ -82,8 +82,8 @@
       }
       ?>
       <br><br>
-      <a href="index.php">Retour à l'accueil</a><br>
-      <a href="nourriture.php">Revenir à la liste des nourritures</a>
+      <a href="index.php"><i class="fas fa-home">&nbsp;</i>Retour à l'accueil</a><br>
+      <a href="nourriture.php#tablo"><i class="far fa-arrow-alt-circle-left">&nbsp;</i>Revenir à la liste des nourritures</a>
 
               </form>
             </div>
@@ -94,7 +94,7 @@
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
           <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
-          </body>
-          </html>
+        </body>
+      </html>
 <?php
 }
