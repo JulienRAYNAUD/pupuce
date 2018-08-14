@@ -38,6 +38,7 @@
                   <th>Nom <a href="medicaments.php?tri=nom&order=asc#tablo" title="Tri croissant"><i class="triascnom fas fa-arrow-alt-circle-down"></i></a><a href="medicaments.php?tri=nom&order=desc#tablo" title="Tri décroissant"><i class="tridescnom disphid fas fa-arrow-alt-circle-up"></i></a></th>
                   <th>Description <a href="medicaments.php?tri=description&order=asc#tablo" title="Tri croissant"><i class="triascdesc fas fa-arrow-alt-circle-down"></i></a><a href="medicaments.php?tri=description&order=desc#tablo" title="Tri décroissant"><i class="tridescdesc disphid fas fa-arrow-alt-circle-up"></i></a></th>
                   <th>Prix <a href="medicaments.php?tri=prix&order=asc#tablo" title="Tri croissant"><i class="triascprix fas fa-arrow-alt-circle-down"></i></a><a href="medicaments.php?tri=prix&order=desc#tablo" title="Tri décroissant"><i class="tridescprix disphid fas fa-arrow-alt-circle-up"></i></a></th>
+                  <th>Quantité stock <a href="medicaments.php?tri=quantiteStock&order=asc#tablo" title="Tri croissant"><i class="triascqte fas fa-arrow-alt-circle-down"></i></a><a href="medicaments.php?tri=quantiteStock&order=desc#tablo" title="Tri décroissant"><i class="tridescqte disphid fas fa-arrow-alt-circle-up"></i></a></th>
                   <th>Image</th>
                   <th colspan="2">Edition</th>
                 </tr>
@@ -51,10 +52,10 @@
           // s'il y a une erreur je la stocke dans ma variable
             $msgKO .= "Erreur !: " . $e->getMessage() . "<br/>";
         }
-        $query = "SELECT `id`,`nom`,`description`,`prix`,`image` FROM `produits` WHERE `TypeProduit` = 'M'";
+        $query = "SELECT `id`,`nom`,`description`,`prix`,`image`,`quantiteStock` FROM `produits` WHERE `TypeProduit` = 'M'";
         if(isset($_GET['tri']) & isset($_GET['order'])){
           //on vérifie les valeurs ce qui permet d'éviter l'affichage d'une erreur si l'URL de tri est modifié (un caractère ajouté à la fin par exemple)
-          if(($_GET['tri'] == "nom" || $_GET['tri'] == "description" || $_GET['tri'] == "prix") & ($_GET['order'] == "asc" || $_GET['order'] == "desc")){
+          if(($_GET['tri'] == "nom" || $_GET['tri'] == "description" || $_GET['tri'] == "prix" || $_GET['tri'] == "quantiteStock") & ($_GET['order'] == "asc" || $_GET['order'] == "desc")){
           $query .= " ORDER BY `".$_GET['tri']."` ".$_GET['order']."";
           }
         }
@@ -65,6 +66,7 @@
                   <td><?php echo $donnees['nom']; ?></td>
                   <td><?php echo $donnees['description']; ?></td>
                   <td><?php echo $donnees['prix']."€"; ?></td>
+                  <td><?php echo $donnees['quantiteStock']; ?></td>
                   <td><img src="<?php echo $donnees['image']; ?>" width='130'></td>
                   <td><a class="btn btn-info" href="modifierMedicament.php?id=<?php echo $donnees['id']; ?>">Modifier</a></td>
                   <td><a class="btn btn-danger" href="delete.php?id=<?php echo $donnees['id']; ?>&description=<?php echo $donnees['description']; ?>&pageretour=medicaments">Supprimer</a></td>
@@ -100,6 +102,14 @@
           <script>
           $(".tridescprix").toggleClass("disphid");
           $(".triascprix").toggleClass("disphid");
+          </script>
+<?php
+    }
+    if($_GET['tri'] == "quantiteStock" & $_GET['order'] == "asc"){
+?>
+          <script>
+          $(".tridescqte").toggleClass("disphid");
+          $(".triascqte").toggleClass("disphid");
           </script>
 <?php
     }
