@@ -106,8 +106,8 @@
     }
       ?>
       <br><br>
-      <a href="index.php"><i class="fas fa-home">&nbsp;</i>Retour à l'accueil</a><br>
-      <a href="nourriture.php#tablo"><i class="far fa-arrow-alt-circle-left">&nbsp;</i>Revenir à la liste des nourritures</a>
+      <a href="nourriture.php#tablo"><i class="far fa-arrow-alt-circle-left">&nbsp;</i>Revenir à la liste des nourritures</a><br>
+      <a href="index.php"><i class="fas fa-home">&nbsp;</i>Retour à l'accueil</a>
 
               </form>
             </div>
