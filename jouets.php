@@ -26,12 +26,37 @@
                 <a href="logout.php">&nbsp;<i class="fas fa-sign-out-alt"> Déconnexion</i></a>
               </div>
               <div class="banniere">
-              	<a href="index.php"><img src="images/banniere.jpg"></a>
+              	<a href="index.php"><img class="lien" src="images/banniere.jpg"></a>
             	</div>
+              <br>
+<?php
+if(isset($_GET['operation'])){
+  if($_GET['operation'] == "modif"){
+?>
+<div class="alert alert-success" role="alert">
+  La modification a bien été prise en compte !
+</div>
+<?php
+  }
+  if($_GET['operation'] == "suppr"){
+?>
+<div class="alert alert-success" role="alert">
+  La suppression a bien été prise en compte !
+</div>
+<?php
+  }
+  if($_GET['operation'] == "ajout"){
+?>
+<div class="alert alert-success" role="alert">
+  Le jouet a bien été ajouté !
+</div>
+<?php
+  }
+}
+?>
       <!--    <h1>Boutique en ligne simplifiée</h1> -->
-          <br>
           <h1 id="tablo">Liste des jouets <a href="ajouterJouet.php" alt="Ajouter un jouet" title="Ajouter un jouet"><i class="fas fa-plus-circle"></i></a></h1>
-          <div >
+          <div>
             <table class="table table-bordered table-hover table-striped">
               <thead class="thead-dark">
                 <tr>
@@ -53,9 +78,9 @@
             $msgKO .= "Erreur !: " . $e->getMessage() . "<br/>";
         }
         $query = "SELECT `id`,`nom`,`description`,`prix`,`image`,`quantiteStock` FROM `produits` WHERE `TypeProduit` = 'J'";
-        if(isset($_GET['tri']) & isset($_GET['order'])){
+        if(isset($_GET['tri']) && isset($_GET['order'])){
           //on vérifie les valeurs ce qui permet d'éviter l'affichage d'une erreur si l'URL de tri est modifié (un caractère ajouté à la fin par exemple)
-          if(($_GET['tri'] == "nom" || $_GET['tri'] == "description" || $_GET['tri'] == "prix" || $_GET['tri'] == "quantiteStock") & ($_GET['order'] == "asc" || $_GET['order'] == "desc")){
+          if(($_GET['tri'] == "nom" || $_GET['tri'] == "description" || $_GET['tri'] == "prix" || $_GET['tri'] == "quantiteStock") && ($_GET['order'] == "asc" || $_GET['order'] == "desc")){
           $query .= " ORDER BY `".$_GET['tri']."` ".$_GET['order']."";
           }
         }
@@ -67,7 +92,7 @@
                   <td><?php echo $donnees['description']; ?></td>
                   <td><?php echo $donnees['prix']."€"; ?></td>
                   <td><?php echo $donnees['quantiteStock']; ?></td>
-                  <td><img src="<?php echo $donnees['image']; ?>" width='130'></td>
+                  <td><a href="<?php echo $donnees['image']; ?>" target="_blank"><img src="<?php echo $donnees['image']; ?>" width='130'></a></td>
                   <td><a class="btn btn-info" href="modifierJouet.php?id=<?php echo $donnees['id']; ?>">Modifier</a></td>
                   <td><a class="btn btn-danger" href="delete.php?id=<?php echo $donnees['id']; ?>&description=<?php echo $donnees['description']; ?>&pageretour=jouets">Supprimer</a></td>
                 </tr>
@@ -80,8 +105,8 @@
           </div>
           <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <?php
-  if(isset($_GET['tri']) & isset($_GET['order'])){
-    if($_GET['tri'] == "nom" & $_GET['order'] == "asc"){
+  if(isset($_GET['tri']) && isset($_GET['order'])){
+    if($_GET['tri'] == "nom" && $_GET['order'] == "asc"){
 ?>
           <script>
           $(".tridescnom").toggleClass("disphid");
@@ -89,7 +114,7 @@
           </script>
 <?php
     }
-    if($_GET['tri'] == "description" & $_GET['order'] == "asc"){
+    if($_GET['tri'] == "description" && $_GET['order'] == "asc"){
 ?>
           <script>
           $(".tridescdesc").toggleClass("disphid");
@@ -97,7 +122,7 @@
           </script>
 <?php
     }
-    if($_GET['tri'] == "prix" & $_GET['order'] == "asc"){
+    if($_GET['tri'] == "prix" && $_GET['order'] == "asc"){
 ?>
           <script>
           $(".tridescprix").toggleClass("disphid");
@@ -105,7 +130,7 @@
           </script>
 <?php
     }
-    if($_GET['tri'] == "quantiteStock" & $_GET['order'] == "asc"){
+    if($_GET['tri'] == "quantiteStock" && $_GET['order'] == "asc"){
 ?>
           <script>
           $(".tridescqte").toggleClass("disphid");

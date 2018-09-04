@@ -1,9 +1,15 @@
 TODO "Chez Pupuce" :
 
-- Terminer le CRUD (le Update et le Delete).
 - Permettre de consulter les produits sans forcément être connecté (actuellement la connexion est obligatoire).
 - Faire un formulaire d'inscription pour la création des comptes clients.
 - Faire le panier.
 - Permettre de télécharger une image produit à partir du disque dur de l'ordinateur qui est utilisé pour créer le produit (actuellement il faut utiliser un lien internet).
 - Télécharger l'image produit à partir du lien internet saisi à la création d'un produit (permet d'éviter un pb d'affichage si le lien meurt).
+- Pagination.
 - Tout refaire en POO...!
+- Commenter !
+- Responsivité !
+
+DONE :
+
+- Terminer le CRUD (le Update et le Delete).

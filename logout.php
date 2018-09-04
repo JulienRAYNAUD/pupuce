@@ -4,5 +4,5 @@ session_start();
 // je détruit ma session
 session_destroy();
 // je redirige vers une page de mon site
-header("Location: index.php");
+header("Location: index.php?logout=success");
 exit;

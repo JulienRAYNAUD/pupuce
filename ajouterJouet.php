@@ -29,7 +29,36 @@
       <!--    <h1>Boutique en ligne simplifiée</h1> -->
 
           <hr>
-
+          <?php
+          //On vérifie si le formulaire a été validé
+          if(isset($_POST['submitJouet'])){
+            // On vérifie si tous les champs sont remplis
+            if(empty($_POST['nom']) || empty($_POST['description']) || empty($_POST['image']) || empty($_POST['prix']) || empty($_POST['quantiteStock'])){
+                // Si non, on avertit l'utilisateur
+              ?><div class="alert alert-danger" role="alert">Veuillez remplir tous les champs !</div><?php
+              $msgKO .= " Veuillez remplir tous les champs !<br>";
+                // On limite la description à 64 caractères max car la bdd n'en accepte pas plus
+            }else if(strlen($_POST['description']) > 64){
+                ?><div class="alert alert-danger" role="alert">La description ne doit pas dépasser 64 caractères !</div><?php
+                $msgKO .= " La description ne doit pas dépasser 64 caractères !<br>";
+              }
+              // si je n'ai pas de message d'alert
+          		if(strlen($msgKO) == 0){
+            try {
+              //je me connecte au serveur et la bdd
+              $dbh = new PDO('mysql:host=localhost;dbname=pupuce;charset=utf8', $user, $pass);
+            } catch (PDOException $e) {
+              // s'il y a une erreur je la stocke dans ma variable
+                $msgKO .= "Erreur !: " . $e->getMessage() . "<br/>";
+            }
+            $query = "INSERT INTO `produits` (`nom`, `description`, `image`, `prix`, `quantiteStock`, `TypeProduit`) VALUES ('".$_POST['nom']."', '".$_POST['description']."', '".$_POST['image']."', '".$_POST['prix']."', '".$_POST['quantiteStock']."', 'J')";
+            $dbh->exec($query);
+          //  echo $query;
+          header("Location: jouets.php?operation=ajout");
+          exit;
+          }
+          }
+          ?>
         	<div class="container-fluid mb-5">
             <h1>Ajouter un jouet</h1>
             <div class="row">
@@ -56,39 +85,9 @@
                     <input type="number" name="quantiteStock" class="form-control form-control-sm" id="quantiteStock" placeholder="Quantité">
                   </div>
                   <button type="submit" class="btn btn-primary" name="submitJouet" id="submitJouet">Ajouter le jouet</button>
-      <?php
-      //On vérifie si le formulaire a été validé
-      if(isset($_POST['submitJouet'])){
-        // On vérifie si tous les champs sont remplis
-        if(empty($_POST['nom']) || empty($_POST['description']) || empty($_POST['image']) || empty($_POST['prix']) || empty($_POST['quantiteStock'])){
-            // Si non, on avertit l'utilisateur
-          ?><span style="color:red";>Veuillez remplir tous les champs !</span><?php
-          $msgKO .= " Veuillez remplir tous les champs !<br>";
-            // On limite la description à 64 caractères max car la bdd n'en accepte pas plus
-        }else if(strlen($_POST['description']) > 64){
-            ?><span style="color:red";>La description ne doit pas dépasser 64 caractères !</span><?php
-            $msgKO .= " La description ne doit pas dépasser 64 caractères !<br>";
-          }
-          // si je n'ai pas de message d'alert
-      		if(strlen($msgKO) == 0){
-        try {
-          //je me connecte au serveur et la bdd
-          $dbh = new PDO('mysql:host=localhost;dbname=pupuce;charset=utf8', $user, $pass);
-        } catch (PDOException $e) {
-          // s'il y a une erreur je la stocke dans ma variable
-            $msgKO .= "Erreur !: " . $e->getMessage() . "<br/>";
-        }
-        $query = "INSERT INTO `produits` (`nom`, `description`, `image`, `prix`, `quantiteStock`, `TypeProduit`) VALUES ('".$_POST['nom']."', '".$_POST['description']."', '".$_POST['image']."', '".$_POST['prix']."', '".$_POST['quantiteStock']."', 'J')";
-        $dbh->exec($query);
-      //  echo $query;
-        ?><span style="color:green";>Le jouet a bien été ajouté !</span><?php
-      }
-      }
-      ?>
+                  <a class="btn btn-danger" href="jouets.php#tablo">Annuler</a>
       <br><br>
       <a href="index.php"><i class="fas fa-home">&nbsp;</i>Retour à l'accueil</a><br>
-      <a href="jouets.php#tablo"><i class="far fa-arrow-alt-circle-left">&nbsp;</i>Revenir à la liste des jouets</a>
-
               </form>
             </div>
           </div>
